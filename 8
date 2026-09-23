@@ -1,0 +1,76 @@
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
+// User-defined exception
+class InsufficientBalanceException extends Exception {
+
+    public InsufficientBalanceException(String message) {
+        super(message);
+    }
+}
+
+// BankAccount class
+class BankAccount {
+    double balance;
+
+    // Constructor
+    BankAccount(double balance) {
+        this.balance = balance;
+    }
+
+    // Withdraw method
+    void withdraw(double amount) throws InsufficientBalanceException {
+
+        if (amount > balance) {
+            throw new InsufficientBalanceException(
+                "Insufficient balance! Withdrawal cannot be processed."
+            );
+        }
+
+        balance = balance - amount;
+
+        System.out.println("Withdrawal successful.");
+        System.out.println("Remaining Balance: Rs." + balance);
+    }
+}
+
+// Main class
+public class BankTransaction {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            // Read initial balance
+            System.out.print("Enter initial account balance: ");
+            double balance = sc.nextDouble();
+
+            // Create BankAccount object
+            BankAccount account = new BankAccount(balance);
+
+            // Read withdrawal amount
+            System.out.print("Enter withdrawal amount: ");
+            double amount = sc.nextDouble();
+
+            // Invoke withdraw method
+            account.withdraw(amount);
+
+        } catch (InputMismatchException e) {
+
+            // Handle invalid input
+            System.out.println("Invalid input! Please enter numeric values.");
+
+        } catch (InsufficientBalanceException e) {
+
+            // Handle insufficient balance
+            System.out.println(e.getMessage());
+
+        } finally {
+
+            // Transaction completion message
+            System.out.println("Transaction completed.");
+            sc.close();
+        }
+    }
+}
