@@ -1,0 +1,69 @@
+class Account {
+    String accountHolderName;
+    int accountNumber;
+
+    Account(String name, int number) {
+        accountHolderName = name;
+        accountNumber = number;
+    }
+
+    void displayDetails() {
+        System.out.println("Account Holder Name: " + accountHolderName);
+        System.out.println("Account Number: " + accountNumber);
+    }
+}
+
+class SavingsAccount extends Account {
+
+    SavingsAccount(String name, int number) {
+        super(name, number);
+    }
+
+    void displaySavingsAccount() {
+        System.out.println("\n--- Savings Account ---");
+        displayDetails();
+    }
+}
+
+class CurrentAccount extends Account {
+
+    CurrentAccount(String name, int number) {
+        super(name, number);
+    }
+
+    void displayCurrentAccount() {
+        System.out.println("\n--- Current Account ---");
+        displayDetails();
+    }
+}
+
+class PremiumSavingsAccount extends SavingsAccount {
+
+    PremiumSavingsAccount(String name, int number) {
+        super(name, number);
+    }
+
+    void displayPremiumAccount() {
+        System.out.println("\n--- Premium Savings Account ---");
+        displayDetails();
+    }
+}
+
+public class BankingSystem {
+
+    public static void main(String[] args) {
+
+        SavingsAccount savings =
+                new SavingsAccount("Rahul", 1001);
+
+        CurrentAccount current =
+                new CurrentAccount("Priya", 1002);
+
+        PremiumSavingsAccount premium =
+                new PremiumSavingsAccount("Arun", 1003);
+
+        savings.displaySavingsAccount();
+        current.displayCurrentAccount();
+        premium.displayPremiumAccount();
+    }
+}
