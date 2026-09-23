@@ -1,0 +1,102 @@
+exp5
+// Online Payment System - Demonstration of Polymorphism in Java
+
+// Parent class
+class Payment {
+
+    // Method overloading - 1
+    void makePayment(double amount) {
+        System.out.println("Payment of Rs." + amount + " made.");
+    }
+
+    // Method overloading - 2
+    void makePayment(double amount, String method) {
+        System.out.println("Payment of Rs." + amount + " made using " + method + ".");
+    }
+
+    // Method overloading - 3
+    void makePayment(double amount, String method, String transactionId) {
+        System.out.println("Payment of Rs." + amount + " made using " + method);
+        System.out.println("Transaction ID: " + transactionId);
+    }
+}
+
+// Subclass
+class UPIPayment extends Payment {
+
+    // Method overriding - Runtime Polymorphism
+    @Override
+    void makePayment(double amount) {
+        System.out.println("\n--- UPI Payment ---");
+        System.out.println("Payment of Rs." + amount + " made using UPI.");
+        System.out.println("Payment Status: Successful");
+    }
+}
+
+// Main class
+public class OnlinePaymentSystem {
+
+    public static void main(String[] args) {
+
+        // Creating object of UPIPayment
+        UPIPayment upi = new UPIPayment();
+
+        // Compile-time polymorphism - Method Overloading
+        System.out.println("--- Compile-Time Polymorphism ---");
+
+        upi.makePayment(500.0);
+        upi.makePayment(1000.0, "Credit Card");
+        upi.makePayment(1500.0, "Net Banking", "TXN1001");
+
+        // Runtime polymorphism - Method Overriding
+        System.out.println("\n--- Runtime Polymorphism ---");
+
+        Payment payment = new UPIPayment();
+        payment.makePayment(2000.0);
+    }
+}
+exp6
+interface RemoteControl {
+    void turnOn();
+    void turnOff();
+}
+
+abstract class Appliance {
+    abstract void displayAppliance();
+}
+
+class SmartTV extends Appliance implements RemoteControl {
+
+    @Override
+    public void turnOn() {
+        System.out.println("Smart TV is turned ON.");
+    }
+
+    @Override
+    public void turnOff() {
+        System.out.println("Smart TV is turned OFF.");
+    }
+
+    @Override
+    void displayAppliance() {
+        System.out.println("Appliance: Smart TV");
+        System.out.println("Type: Smart Home Appliance");
+    }
+}
+
+public class SmartHome {
+    public static void main(String[] args) {
+
+        // Dynamic Method Dispatch
+        Appliance appliance = new SmartTV();
+
+        // Calling overridden method using parent class reference
+        appliance.displayAppliance();
+
+        // Type casting to access interface methods
+        RemoteControl remote = (RemoteControl) appliance;
+
+        remote.turnOn();
+        remote.turnOff();
+    }
+}
