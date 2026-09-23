@@ -1,0 +1,38 @@
+class Book {
+    int bookid;
+    String title;
+    String author;
+    String category;
+    double price;
+    boolean available;
+
+    Book(int bookid, String title, String author, String category, double price, boolean available) {
+        this.bookid = bookid;
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.price = price;
+        this.available = available;
+    }
+
+    void displayBookDetails() {
+        System.out.println("Book ID: " + bookid);
+        System.out.println("Book Name: " + title);
+        System.out.println("Author: " + author);
+        System.out.println("Category: " + category);
+        System.out.println("Price: " + price);
+        System.out.println("Available: " + (available ? "Yes" : "No"));
+        System.out.println("------------------");
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Book b1 = new Book(101, "The Great Gatsby", "F. Scott Fitzgerald", "Fiction", 10.99, true);
+        Book b2 = new Book(102, "To Kill a Mockingbird", "Harper Lee", "Fiction", 12.99, false);
+
+        System.out.println("Library Management System");
+        b1.displayBookDetails();
+        b2.displayBookDetails();
+    }
+}
