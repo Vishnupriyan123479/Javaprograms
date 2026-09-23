@@ -1,0 +1,80 @@
+abstract class Employee {
+
+    // Static variable
+    static String company = "ABC Technologies";
+
+    // Variables with different access modifiers
+    public String department;
+    private double salary;
+    protected String designation;
+    String location; // package-private (default)
+
+    // Parameterized constructor
+    Employee(String department, double salary, String designation, String location) {
+        this.department = department;
+        this.salary = salary;
+        this.designation = designation;
+        this.location = location;
+    }
+
+    // Getter for private salary variable
+    public double getSalary() {
+        return salary;
+    }
+
+    // Setter for private salary variable
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    // Abstract method
+    abstract void displayRole();
+
+    // Method to display employee details
+    void displayDetails() {
+        System.out.println("Company     : " + company);
+        System.out.println("Department  : " + department);
+        System.out.println("Salary      : " + getSalary());
+        System.out.println("Designation : " + designation);
+        System.out.println("Location    : " + location);
+    }
+}
+
+// Subclass
+class Developer extends Employee {
+
+    Developer(String department, double salary, String designation, String location) {
+        super(department, salary, designation, location);
+    }
+
+    // Implementation of abstract method
+    @Override
+    void displayRole() {
+        System.out.println("Role        : Developer");
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+
+        // Create object of Developer class
+        Developer emp = new Developer(
+            "Software Development",
+            60000,
+            "Senior Developer",
+            "Chennai"
+        );
+
+        // Display employee details
+        emp.displayDetails();
+
+        // Display employee role
+        emp.displayRole();
+
+        // Modify salary using setter
+        emp.setSalary(65000);
+
+        System.out.println("\nUpdated Salary: " + emp.getSalary());
+    }
+}
